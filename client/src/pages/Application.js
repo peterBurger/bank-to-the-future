@@ -3,7 +3,6 @@ import { validateField, isValidForm } from '../utils/validateApplicationForm';
 import { usStates, countries } from '../utils/seedData';
 import Modal from '../components/Modal';
 import '../styles/global.css';
-require('dotenv').config();
 
 const FORM_URL = `${process.env.REACT_APP_SERVER_URL}/submit-application`;
 
