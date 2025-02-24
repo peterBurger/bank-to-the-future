@@ -3,8 +3,9 @@ import { validateField, isValidForm } from '../utils/validateApplicationForm';
 import { usStates, countries } from '../utils/seedData';
 import Modal from '../components/Modal';
 import '../styles/global.css';
+require('dotenv').config();
 
-const API_URL = 'http://localhost:5000/submit-application';
+const FORM_URL = `${process.env.REACT_APP_SERVER_URL}/submit-application`;
 
 const Application = () => {
   const initialFormState = {
@@ -72,7 +73,7 @@ const Application = () => {
     setModalOpen(false);
 
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(FORM_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
