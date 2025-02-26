@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { features } from '../utils/seedData';
+import { features } from '../utils/templateData';
 import '../styles/global.css';
 import hoverboardImage from '../assets/hoverboard.jpg';
 

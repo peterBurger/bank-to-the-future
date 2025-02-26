@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { validateField, isValidForm } from '../utils/validateApplicationForm';
-import { usStates, countries } from '../utils/seedData';
+import { usStates, countries, outcomeMessages, snippets } from '../utils/templateData';
 import Modal from '../components/Modal';
 import '../styles/global.css';
 
@@ -49,9 +49,10 @@ const Application = () => {
     }
 
     setModalContent({
-      title: 'Confirm Your Details',
+      title: `Hi ${formData.name_first}!`,
       message: (
         <div className="form-summary">
+          <p><strong>Take another look and click below.</strong></p>
           {Object.entries(formData).map(([key, value]) => (
             <div className="form-summary-row" key={key}>
               <div className="form-summary-key">{key.replace(/_/g, ' ')}</div>
@@ -69,7 +70,12 @@ const Application = () => {
   };
 
   const handleFinalSubmit = async () => {
-    setModalOpen(false);
+    setModalContent({
+      title: snippets.sending,
+      message: <div className="flux-capacitor"><p className="flux-lines"><i className="fa-solid fa-y blinking"></i></p><p>One moment while we synchronize the flux capacitor!</p></div>,
+      confirmAction: null,
+    });
+    setModalOpen(true);
 
     try {
       const response = await fetch(FORM_URL, {
@@ -81,14 +87,8 @@ const Application = () => {
       const data = await response.json();
 
       if (response.ok && data?.summary?.outcome) {
-        const outcomeMessages = {
-          'Approved': 'Great Scott! Your application has been APPROVED!',
-          'Manual Review': 'Looks like Doc will need to REVIEW your application. We\'ll be in touch shortly!',
-          'Denied': 'Sorry! According to Doc\'s calculations, your application was NOT APPROVED at this time.',
-        };
-
         setModalContent({
-          title: 'Application Status',
+          title: 'Doc says...',
           message: outcomeMessages[data.summary.outcome],
           confirmAction: null,
         });
@@ -147,7 +147,7 @@ const Application = () => {
           {errors.address_state && <p className="error-message">{errors.address_state}</p>}
 
           <label>ZIP/Postal Code*</label>
-          <input type="text" name="address_postal_code" value={formData.address_postal_code} onChange={handleChange} required />
+          <input type="text" name="address_postal_code" placeholder="5 or 9 digits (no dash)" maxLength="9" value={formData.address_postal_code} onChange={handleChange} required />
           {errors.address_postal_code && <p className="error-message">{errors.address_postal_code}</p>}
 
           <label>Country*</label>
@@ -174,7 +174,7 @@ const Application = () => {
           <button type="submit">Next</button>
         </form>
 
-        <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={modalContent.title} message={modalContent.message} confirmAction={modalContent.confirmAction} />
+        <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={modalContent.title} message={modalContent.message} confirmAction={modalContent.confirmAction}/>
       </div>
     </div>
   );

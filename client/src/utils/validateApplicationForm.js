@@ -6,7 +6,7 @@ export const validateField = (name, value) => {
       error = /^[A-Z]{2}$/.test(value) ? '' : 'State must be a valid two-letter code (e.g. NY)';
       break;
     case 'address_postal_code':
-      error = /^\d{5}(-\d{4})?$/.test(value) ? '' : 'Invalid ZIP/Postal Code';
+      error = /^\d{5}(\d{4})?$/.test(value) ? '' : 'Invalid ZIP/Postal Code';
       break;
     case 'address_country':
       error = value === 'US' ? '' : 'Country must be \'US\'';

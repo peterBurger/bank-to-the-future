@@ -1,5 +1,5 @@
 const validateStateCode = (state) => /^[A-Z]{2}$/.test(state);
-const validatePostalCode = (zip) => /^\d{5}(-\d{4})?$/.test(zip);
+const validatePostalCode = (zip) => /^\d{5}(\d{4})?$/.test(zip);
 const validateSSN = (ssn) => /^\d{9}$/.test(ssn);
 const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 const validateDate = (date) => {

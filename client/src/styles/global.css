@@ -1,4 +1,4 @@
-/* GLOBALs *********************************************************************/
+/* GLOBALs ********************************************************************/
 :root {
   --blue: #109bff;
   --pink: #d02382;
@@ -108,7 +108,7 @@ body {
 
 .application-form input:focus,
 .application-form select:focus {
-  border-color: var(--pink);
+  border-color: var(--blue);
   outline: none;
 }
 
@@ -143,10 +143,19 @@ body {
   text-align: center;
 }
 
-.modal-content h3 {
-  font-size: 20px;
+.modal-content h2 {
+  font-size: 26px;
   font-weight: 600;
   margin-bottom: 20px;
+}
+
+.outcome-icon {
+  color: var(--blue);
+  font-size: 40px;
+}
+
+.outcome-message {
+  font-style: italic;
 }
 
 /* FORM SUMMARY ***************************************************************/
@@ -164,18 +173,21 @@ body {
 }
 
 .form-summary-key {
-  line-height: 16px;
   text-transform: uppercase;
   font-size: 10px;
+  line-height: 16px;
+  vertical-align: middle;
   flex: 1;
   text-align: right;
+  margin-right: 10px;
 }
 
 .form-summary-value {
   line-height: 16px;
+  vertical-align: middle;
   flex: 1;
   text-align: left;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 /* BUTTONS ********************************************************************/
@@ -410,4 +422,36 @@ button:hover, .primary-button:hover {
 
 .footer-social a:hover {
   color: var(--pink);
+}
+
+/* FLUX CAPACITOR *************************************************************/
+.flux-capacitor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.flux-lines {
+  background-color: var(--lightGrey);
+  border: 3px solid var(--black);
+  border-radius: var(--radius);
+  width: 50px;
+  height: 50px;
+}
+
+.blinking {
+  animation: blinker 1.2s linear infinite;
+  color: var(--pink);
+  display:inline-block;
+  font-size: 40px;
+  line-height: 50px;
+  text-align: center;
+  vertical-align: bottom;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }
